@@ -6,6 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Terminal.Domain.Entities;
+using Terminal.Infarstructure.Configurations;
 
 namespace Terminal.Infarstructure;
 
@@ -19,7 +20,7 @@ public class TerminalDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-       
+        //modelBuilder.ApplyConfiguration(new BusConfig());
     }
 
     public DbSet<Bus> Buses { get; set; }
