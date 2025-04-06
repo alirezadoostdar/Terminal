@@ -74,12 +74,12 @@
                           SelectedItem="{Binding SelectedIndex}"
                           Margin="5" VerticalScrollBarVisibility="Auto">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Id}" Width="50" Header="Id"/>
-                        <DataGridTextColumn Binding="{Binding Title}" Width="*" Header="Title"/>
-                        <DataGridTextColumn Binding="{Binding Rate}" Width="50" Header="Rate"/>
-                        <DataGridTextColumn Binding="{Binding Capacity}" Width="70" Header="Capacity"/>
-                        <DataGridTextColumn Binding="{Binding Code}" Width="*" Header="Code"/>
-                        <DataGridTextColumn Binding="{Binding Model}" Width="*" Header="Model"/>
+                        <DataGridTextColumn Binding="{Binding Id}" Width="Auto" Header="Id"/>
+                        <DataGridTextColumn Binding="{Binding Title}" Width="Auto" Header="Title"/>
+                        <DataGridTextColumn Binding="{Binding Rate}" Width="Auto" Header="Rate"/>
+                        <DataGridTextColumn Binding="{Binding Capacity}" Width="Auto" Header="Capacity"/>
+                        <DataGridTextColumn Binding="{Binding Code}" Width="Auto" Header="Code"/>
+                        <DataGridTextColumn Binding="{Binding Model}" Width="Auto" Header="Model"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

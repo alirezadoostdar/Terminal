@@ -18,9 +18,13 @@ public class BusViewModel : BaseViewModel
     public BusViewModel()
     {
         busService = App.AppHost.Services.GetRequiredService<BusService>();
-
+        LoadList();
     }
 
+    private void LoadList()
+    {
+        Buses = new ObservableCollection<BusDto>(busService.GetAll());
+    }
     #region Fields
 
     private ObservableCollection<BusDto> buses = new();
