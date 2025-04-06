@@ -21,6 +21,7 @@ public class BusViewModel : BaseViewModel
     }
 
     #region Fields
+
     private ObservableCollection<BusDto> buses = new();
     public ObservableCollection<BusDto> Buses
     {

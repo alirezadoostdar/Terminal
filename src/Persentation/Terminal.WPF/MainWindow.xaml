@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Margin="5" FontSize="20" Grid.Row="0"
+                    Name="btnBus" Click="btnBus_Click">Buses</Button>
+            <Button Margin="5" FontSize="20" Grid.Row="1">Routes</Button>
+            <Button Margin="5" FontSize="20" Grid.Row="2">Trips</Button>
+            <Button Margin="5" FontSize="20" Grid.Row="3">Tickets</Button>
+        </Grid>
+        <Grid Grid.Column="1" Name="contentGrid">
+            <StackPanel Name="spContent"/>
+        </Grid>
     </Grid>
 </Window>

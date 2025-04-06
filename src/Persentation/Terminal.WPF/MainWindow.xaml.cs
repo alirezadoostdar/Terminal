@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Terminal.WPF.Views.UserControls;
 
 namespace Terminal.WPF
 {
@@ -19,6 +20,13 @@ namespace Terminal.WPF
         public MainWindow()
         {
             InitializeComponent();
+            spContent.Children.Add(new BusUserControl());
+        }
+
+        private void btnBus_Click(object sender, RoutedEventArgs e)
+        {
+            spContent.Children.Clear();
+            spContent.Children.Add(new BusUserControl());
         }
     }
 }
