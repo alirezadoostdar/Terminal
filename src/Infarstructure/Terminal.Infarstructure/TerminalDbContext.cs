@@ -12,7 +12,7 @@ namespace Terminal.Infarstructure;
 
 public class TerminalDbContext : DbContext
 {
-    public TerminalDbContext(DbContextOptions options):base(options)
+    public TerminalDbContext(DbContextOptions<TerminalDbContext> options):base(options)
     {
         
     }
