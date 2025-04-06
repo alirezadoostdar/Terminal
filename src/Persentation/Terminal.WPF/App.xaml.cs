@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Windows;
+using Terminal.Application;
 using Terminal.Infarstructure;
 
 namespace Terminal.WPF
@@ -29,7 +30,9 @@ namespace Terminal.WPF
                         options.UseSqlite(connectionString);
                     });
 
-                    
+                    services.RegisterApplicationService();
+                    services.RegisterInfrastructureService();
+
                 }).Build();
         }
 

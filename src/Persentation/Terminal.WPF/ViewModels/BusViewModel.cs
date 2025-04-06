@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terminal.Application.Dtos;
 using Terminal.Application.Services;
+using Terminal.WPF.Commands;
 
 namespace Terminal.WPF.ViewModels;
 
@@ -29,12 +30,12 @@ public class BusViewModel : BaseViewModel
         set { buses = value; }
     }
 
-    private BusDto selectedIndex;
+    private BusDto selectedItem;
 
-    public BusDto SelectedIndex
+    public BusDto SelectedItem
     {
-        get { return selectedIndex; }
-        set { selectedIndex = value; }
+        get { return selectedItem; }
+        set { selectedItem = value; }
     }
 
     private int id;
@@ -85,5 +86,30 @@ public class BusViewModel : BaseViewModel
         set { model = value; NotifyPropertyChanged(); }
     }
 
+    #endregion
+
+    #region Commands
+    public RelayCommand AddCommand => new RelayCommand(execute => Add());
+    private void Add()
+    {
+        try
+        {
+            busService.Add(new BusDto
+            {
+                Id = Id,
+                Title = Title,
+                Capacity = Capacity,
+                Code = Code,
+                Model = model,
+                Rate = Rate
+            });
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+
+    }
     #endregion
 }
