@@ -19,21 +19,29 @@ public class TicketRepository : ITicketRepository
 
     public void Add(Ticket ticket)
     {
-
+        context.Add(ticket);
+        context.SaveChanges();
     }
 
     public IEnumerable<Ticket> GetAll()
     {
-        throw new NotImplementedException();
+        return context.Tickets.ToList();
     }
 
     public void Remove(int id)
     {
-        throw new NotImplementedException();
+        var ticket = context.Tickets.First(t => t.Id == id);
+        context.Remove(ticket);
     }
 
     public void Update(Ticket ticket)
     {
-        throw new NotImplementedException();
+        var data = context.Tickets.First(x => x.Id == ticket.Id);
+
+        data.FirstName = ticket.FirstName;
+        data.LastName = ticket.LastName;
+        data.Trip = ticket.Trip;
+        context.Entry(data).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        context.SaveChanges();
     }
 }
