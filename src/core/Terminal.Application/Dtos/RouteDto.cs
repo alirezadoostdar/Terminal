@@ -13,3 +13,10 @@ public class RouteDto
     public string Destination { get; set; }
     public decimal BasePrice { get; set; }
 }
+
+
+public class RouteComboDto
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+}

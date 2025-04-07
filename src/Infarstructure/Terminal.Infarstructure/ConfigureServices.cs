@@ -15,6 +15,8 @@ public static class ConfigureServices
     {
         services.AddScoped<IBusRepository,BusRepository>();
         services.AddScoped<IRouteRepository,RouteRepository>();
+        services.AddScoped<ITripRepository,TripRepository>();
+        services.AddScoped<ITicketRepository,TicketRepository>();
         return services;
     }
 }

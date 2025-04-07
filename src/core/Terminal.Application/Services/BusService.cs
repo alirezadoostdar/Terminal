@@ -70,4 +70,13 @@ public class BusService
             Title = x.Title
         }).ToList();
     }
+
+    public IEnumerable<BusComboDto> ComboList()
+    {
+        return  busRepository.GetAll().Select(x => new BusComboDto
+        {
+            Id = x.Id,
+            Title = $"{x.Title} Model: {x.Model}  Rate: {x.Rate} Capacity: {x.Capacity}",
+        });
+    }
 }

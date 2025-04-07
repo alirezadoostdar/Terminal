@@ -49,6 +49,7 @@ namespace Terminal.Infarstructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Code = table.Column<string>(type: "TEXT", nullable: false),
                     RouteId = table.Column<int>(type: "INTEGER", nullable: false),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     BusId = table.Column<int>(type: "INTEGER", nullable: false)

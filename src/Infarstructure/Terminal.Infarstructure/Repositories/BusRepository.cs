@@ -27,6 +27,11 @@ public class BusRepository : IBusRepository
        
     }
 
+    public Bus Get(int id)
+    {
+        return context.Buses.First(x => x.Id == id);
+    }
+
     public IEnumerable<Bus> GetAll()
     {
         return context.Buses.ToList();

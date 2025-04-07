@@ -100,6 +100,10 @@ namespace Terminal.Infarstructure.Migrations
                     b.Property<int>("BusId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("TEXT");
 

@@ -14,4 +14,5 @@ public interface IRouteRepository
     void Update(Route route);
     IEnumerable<Route> GetAll();
     bool IsUsed(int id);
+    Route Get(int id);
 }

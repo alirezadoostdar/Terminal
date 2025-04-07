@@ -11,7 +11,7 @@ using Terminal.Infarstructure;
 namespace Terminal.Infarstructure.Migrations
 {
     [DbContext(typeof(TerminalDbContext))]
-    [Migration("20250405135310_InitialCreate")]
+    [Migration("20250407145301_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -102,6 +102,10 @@ namespace Terminal.Infarstructure.Migrations
 
                     b.Property<int>("BusId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("TEXT");

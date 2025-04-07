@@ -15,3 +15,9 @@ public class BusDto
     public decimal Rate { get; set; }
     public string Model { get; set; }
 }
+
+public class BusComboDto
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+}

@@ -4,9 +4,93 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Terminal.WPF.Views.UserControls"
+             xmlns:vw="clr-namespace:Terminal.WPF.ViewModels"            
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.DataContext>
+        <vw:TripViewModel/>
+    </UserControl.DataContext>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Background="Aqua"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       FontSize="22"
+                       Margin="5"
+                       FontWeight="Bold">Manage Trips</Label>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">Id</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">Code</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">Bus</TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">Route</TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">Date and Time</TextBlock>
+
+                <TextBox Text="{Binding Id}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" IsEnabled="False"></TextBox>
+                <TextBox Text="{Binding Code}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" IsEnabled="False"></TextBox>
+                <ComboBox ItemsSource="{Binding BusList}"
+                          SelectedItem="{Binding SelectedBusItem}"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="Title"
+                          Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5"></ComboBox>
+                <ComboBox ItemsSource="{Binding RouteList}"
+                          SelectedItem="{Binding SelectedRouteItem}"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="Title"
+                          Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5"></ComboBox>
+                <TextBox Text="{Binding TripDate}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="5" ></TextBox>
+
+                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding AddCommand}" Margin="5">Add</Button>
+                    <Button Command="{Binding UpdateCommand}" Grid.Column="1" Margin="5">Update</Button>
+                    <Button Command="{Binding DeleteCommand}" Grid.Column="2" Margin="5">Delete</Button>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding Trips}"
+                          SelectedItem="{Binding SelectedItem}"
+                          Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Code" Binding="{Binding Code}"/>
+                        <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"/>
+                        <DataGridTextColumn Header="Destination" Binding="{Binding Destination}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price,StringFormat=c}"/>
+                        <DataGridTextColumn Header="Bus" Binding="{Binding Bus}"/>
+                        <DataGridTextColumn Header="Capacity" Binding="{Binding Capacity}"/>
+                        <DataGridTextColumn Header="DateTime" Binding="{Binding DateTime}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

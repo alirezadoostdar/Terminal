@@ -61,4 +61,13 @@ public class RouteService
             Origin = x.Origin
         });
     }
+
+    public IEnumerable<RouteComboDto> ComboList()
+    {
+        return routeRepository.GetAll().Select(x => new RouteComboDto
+        {
+            Id = x.Id,
+            Title = $"{x.Origin} To {x.Destination} - Base Price: {x.BasePrice.ToString("c")}",
+        });
+    }
 }

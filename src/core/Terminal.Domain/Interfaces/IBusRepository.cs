@@ -14,4 +14,5 @@ public interface IBusRepository
     void Delete(int id);
     bool IsUsed(int id);
     void Update(Bus bus);
+    Bus Get(int id);
 }

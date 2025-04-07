@@ -19,6 +19,11 @@ public class RouteRepository : IRouteRepository
         context.SaveChanges();
     }
 
+    public Route Get(int id)
+    {
+        return context.Routes.First(x => x.Id == id);
+    }
+
     public IEnumerable<Route> GetAll()
     {
         return context.Routes.ToList();
