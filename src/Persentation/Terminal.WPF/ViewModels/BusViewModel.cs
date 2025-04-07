@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Terminal.Application.Dtos;
 using Terminal.Application.Services;
 using Terminal.WPF.Commands;
@@ -27,11 +28,11 @@ public class BusViewModel : BaseViewModel
     }
     #region Fields
 
-    private ObservableCollection<BusDto> buses = new();
+    private ObservableCollection<BusDto> buses;
     public ObservableCollection<BusDto> Buses
     {
         get { return buses; }
-        set { buses = value; }
+        set { buses = value; NotifyPropertyChanged(); }
     }
 
     private BusDto selectedItem;
@@ -39,7 +40,20 @@ public class BusViewModel : BaseViewModel
     public BusDto SelectedItem
     {
         get { return selectedItem; }
-        set { selectedItem = value; }
+        set 
+        {
+            selectedItem = value;
+            if (value != null)
+            {
+                Id = value.Id;
+                Title = value.Title;
+                Rate = value.Rate;
+                Capacity = value.Capacity;
+                Code = value.Code;
+                Model = value.Model;
+            }
+            NotifyPropertyChanged();
+        }
     }
 
     private int id;
@@ -47,7 +61,7 @@ public class BusViewModel : BaseViewModel
     public int Id
     {
         get { return id;  }
-        set { id = value; NotifyPropertyChanged(); }
+        set { id = value; NotifyPropertyChanged(nameof(id)); }
     }
 
     private string title;
@@ -94,11 +108,14 @@ public class BusViewModel : BaseViewModel
 
     #region Commands
     public RelayCommand AddCommand => new RelayCommand(execute => Add());
-    private void Add()
+    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete(),canExecute => Id > 0);
+    public RelayCommand UpdateCommand => new RelayCommand(execute => Update());
+
+    private void Update()
     {
         try
         {
-            busService.Add(new BusDto
+            busService.Update(new BusDto
             {
                 Id = Id,
                 Title = Title,
@@ -107,11 +124,50 @@ public class BusViewModel : BaseViewModel
                 Model = model,
                 Rate = Rate
             });
+            MessageBox.Show("Updated Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            LoadList();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            MessageBox.Show(ex.Message, "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            throw;
+        }
+    }
+
+    private void Delete()
+    {
+        try
+        {
+            busService.Delete(Id);
+            MessageBox.Show("Deleted Successfully","Success",MessageBoxButton.OK, MessageBoxImage.Information);
+            LoadList();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void Add()
+    {
+        try
+        {
+            busService.Add(new BusDto
+            {
+                Id = 0,
+                Title = Title,
+                Capacity = Capacity,
+                Code = Code,
+                Model = model,
+                Rate = Rate
+            });
+            MessageBox.Show("Added Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            LoadList();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
 
     }

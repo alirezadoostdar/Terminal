@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Terminal.WPF.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for RouteViewModel.xaml
+    /// Interaction logic for TicketUserControl.xaml
     /// </summary>
-    public partial class RouteViewModel : UserControl
+    public partial class TicketUserControl : UserControl
     {
-        public RouteViewModel()
+        public TicketUserControl()
         {
             InitializeComponent();
         }

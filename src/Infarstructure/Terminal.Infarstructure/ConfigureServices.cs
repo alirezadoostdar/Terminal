@@ -14,6 +14,7 @@ public static class ConfigureServices
     public static IServiceCollection RegisterInfrastructureService(this IServiceCollection services)
     {
         services.AddScoped<IBusRepository,BusRepository>();
+        services.AddScoped<IRouteRepository,RouteRepository>();
         return services;
     }
 }

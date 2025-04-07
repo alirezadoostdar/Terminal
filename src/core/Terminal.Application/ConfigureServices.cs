@@ -12,7 +12,8 @@ public static class ConfigureServices
 {
     public static IServiceCollection RegisterApplicationService(this IServiceCollection services)
     {
-        services.AddScoped<BusService> ();
+        services.AddScoped<BusService>();
+        services.AddScoped<RouteService>();
         return services;
     }
 }

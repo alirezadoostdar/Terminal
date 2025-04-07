@@ -18,8 +18,35 @@ public class BusRepository : IBusRepository
         context.SaveChanges();
     }
 
+    public void Delete(int id)
+    {
+        var bus = context.Buses.First(x => x.Id == id);
+
+        context.Buses.Remove(bus);
+        context.SaveChanges();
+       
+    }
+
     public IEnumerable<Bus> GetAll()
     {
         return context.Buses.ToList();
+    }
+
+    public bool IsUsed(int id)
+    {
+      return  context.Trips.Any(x => x.Bus.Id == id);
+    }
+
+    public void Update(Bus bus)
+    {
+        var data = context.Buses.First(x => x.Id ==  bus.Id);   
+
+        data.Title = bus.Title;
+        data.Rate = bus.Rate;
+        data.Code = bus.Code;   
+        data.Capacity = bus.Capacity;
+        data.Model = bus.Model;
+        context.Entry(data).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        context.SaveChanges();
     }
 }

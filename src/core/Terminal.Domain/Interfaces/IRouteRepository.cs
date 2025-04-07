@@ -7,11 +7,11 @@ using Terminal.Domain.Entities;
 
 namespace Terminal.Domain.Interfaces;
 
-public interface IBusRepository
+public interface IRouteRepository
 {
-    void Add(Bus bus);
-    IEnumerable<Bus> GetAll();
-    void Delete(int id);
+    void Add(Route route);
+    void Remove(int id);
+    void Update(Route route);
+    IEnumerable<Route> GetAll();
     bool IsUsed(int id);
-    void Update(Bus bus);
 }

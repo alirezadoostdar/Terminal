@@ -9,8 +9,9 @@ namespace Terminal.Domain.Entities;
 public class Trip
 {
     public int Id { get; set; }
+    public string Code{ get; set; }
     public Route Route { get; set; }
     public DateTime DateTime { get; set; }
     public Bus Bus { get; set; }
-    private List<Ticket> Tickets = new();
+
 }

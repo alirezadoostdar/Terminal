@@ -7,11 +7,10 @@ using Terminal.Domain.Entities;
 
 namespace Terminal.Domain.Interfaces;
 
-public interface IBusRepository
+public interface ITicketRepository
 {
-    void Add(Bus bus);
-    IEnumerable<Bus> GetAll();
-    void Delete(int id);
-    bool IsUsed(int id);
-    void Update(Bus bus);
+    void Add(Ticket ticket);
+    void Update(Ticket ticket);
+    void Remove(int id);
+    IEnumerable<Ticket> GetAll();
 }

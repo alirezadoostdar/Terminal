@@ -28,5 +28,23 @@ namespace Terminal.WPF
             spContent.Children.Clear();
             spContent.Children.Add(new BusUserControl());
         }
+
+        private void btnRoute_Click(object sender, RoutedEventArgs e)
+        {
+            spContent.Children.Clear();
+            spContent.Children.Add(new RouteUserControl());
+        }
+
+        private void btnTrip_Click(object sender, RoutedEventArgs e)
+        {
+            spContent.Children.Clear();
+            spContent.Children.Add(new TripUserControl());
+        }
+
+        private void btnTicket_Click(object sender, RoutedEventArgs e)
+        {
+            spContent.Children.Clear();
+            spContent.Children.Add(new TicketUserControl());
+        }
     }
 }
