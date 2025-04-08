@@ -15,4 +15,5 @@ public interface ITripRepository
     IEnumerable<Trip> GetAll();
     Trip Get(int id);
     IEnumerable<Trip> GetValidList();
+    IEnumerable<Trip> GetByRouteId(int id);
 }

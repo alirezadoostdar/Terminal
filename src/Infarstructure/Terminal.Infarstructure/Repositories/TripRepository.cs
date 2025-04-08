@@ -33,6 +33,11 @@ public class TripRepository : ITripRepository
         return context.Trips.ToList();
     }
 
+    public IEnumerable<Trip> GetByRouteId(int id)
+    {
+        return context.Trips.Where(x => x.Route.Id == id);
+    }
+
     public IEnumerable<Trip> GetValidList()
     {
         return context.Trips.Where(x => x.DateTime > DateTime.Now).ToList();

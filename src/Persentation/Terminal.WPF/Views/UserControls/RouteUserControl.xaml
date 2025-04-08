@@ -16,6 +16,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
@@ -72,6 +74,33 @@
                         <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"/>
                         <DataGridTextColumn Header="Destination" Binding="{Binding Destination}"/>
                         <DataGridTextColumn Header="Base Pric" Binding="{Binding BasePrice,StringFormat=c}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Background="Aqua"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       FontSize="22"
+                       Margin="5"
+                       FontWeight="Bold">Trips Of Selected Route</Label>
+            </Grid>
+            <Grid Grid.Row="4">
+                <DataGrid AutoGenerateColumns="False"
+                          ItemsSource="{Binding TripRoutes}"
+                          Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Code" Binding="{Binding Code}"/>
+                        <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"/>
+                        <DataGridTextColumn Header="Destination" Binding="{Binding Destination}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price,StringFormat=c}"/>
+                        <DataGridTextColumn Header="Bus" Binding="{Binding Bus}"/>
+                        <DataGridTextColumn Header="Capacity" Binding="{Binding Capacity}"/>
+                        <DataGridTextColumn Header="DateTime" Binding="{Binding DateTime}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

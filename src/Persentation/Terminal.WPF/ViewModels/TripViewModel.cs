@@ -75,6 +75,7 @@ public class TripViewModel : BaseViewModel
         set { trips = value; NotifyPropertyChanged(); }
     }
 
+
     private TripListDto selectedItem;
 
     public TripListDto SelectedItem
@@ -90,6 +91,8 @@ public class TripViewModel : BaseViewModel
                 RouteId = value.RouteId;
                 TripDate = value.DateTime;
                 Code = value.Code;
+                SelectedBusItem = BusList.Where(x => x.Id == value.BusId).FirstOrDefault();
+                SelectedRouteItem = RouteList.Where(x => x.Id == value.RouteId).FirstOrDefault();
             }
             NotifyPropertyChanged();
         }

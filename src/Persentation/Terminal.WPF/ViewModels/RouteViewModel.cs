@@ -16,10 +16,11 @@ namespace Terminal.WPF.ViewModels;
 public class RouteViewModel : BaseViewModel
 {
     private readonly RouteService routeService;
-
+    private readonly TripService tripService;
     public RouteViewModel()
     {
         routeService = App.AppHost.Services.GetRequiredService<RouteService>();
+        tripService = App.AppHost.Services.GetRequiredService<TripService>();   
         LoadList();
     }
 
@@ -38,6 +39,14 @@ public class RouteViewModel : BaseViewModel
         set { routes = value; NotifyPropertyChanged(); }
     }
 
+    private ObservableCollection<TripListDto> tripRoutes;
+
+    public ObservableCollection<TripListDto> TripRoutes
+    {
+        get { return tripRoutes; }
+        set { tripRoutes = value; NotifyPropertyChanged(); }
+    }
+
     private RouteDto selectedItem;
 
     public RouteDto SelectedItem
@@ -52,6 +61,7 @@ public class RouteViewModel : BaseViewModel
                 Origin = value.Origin;
                 Destination = value.Destination;
                 BasePrice = value.BasePrice;
+                TripRoutes = new ObservableCollection<TripListDto>(tripService.GetByRouteId(value.Id));
             }
             NotifyPropertyChanged();
         }

@@ -75,4 +75,21 @@ public class TripService
             RouteId = x.Route.Id,
         });
     }
+
+    public IEnumerable<TripListDto> GetByRouteId(int routeId)
+    {
+        return tripRepository.GetByRouteId(routeId).Select(x => new TripListDto
+        {
+            Id = x.Id,
+            Capacity = x.Bus.Capacity,
+            Destination = x.Route.Destination,
+            Origin = x.Route.Origin,
+            Bus = $"{x.Bus.Title} - {x.Bus.Model}",
+            Code = x.Code,
+            DateTime = x.DateTime,
+            Price = x.Route.BasePrice * x.Bus.Rate,
+            BusId = x.Bus.Id,
+            RouteId = x.Route.Id,
+        });
+    }
 }
