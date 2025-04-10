@@ -24,5 +24,6 @@ public class TicketListDto
     public string Bus { get; set; }
     public decimal Price { get; set; }
     public DateTime TripDate { get; set; }
+    public int TripId { get; set; }
 }
 

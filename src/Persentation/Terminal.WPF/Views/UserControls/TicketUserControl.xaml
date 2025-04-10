@@ -47,18 +47,18 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">Last Name</TextBlock>
                 <TextBlock Grid.Row="3" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">Trip</TextBlock>
 
-                <TextBox Text="{Binding Id}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" IsEnabled="False"></TextBox>
-                <TextBox Text="{Binding FirstName}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" ></TextBox>
-                <TextBox Text="{Binding LastName}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Text="{Binding Id}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="10" IsEnabled="False"></TextBox>
+                <TextBox Text="{Binding FirstName, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10" ></TextBox>
+                <TextBox Text="{Binding LastName, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10"/>
 
 
-                <ComboBox ItemsSource="{Binding Trips}"
-                          SelectedItem="{Binding SelectedTripItem}"
+                <ComboBox ItemsSource="{Binding Trips, ValidatesOnDataErrors=True}"
+                          SelectedItem="{Binding SelectedTripItem, ValidatesOnDataErrors=True}"
                           SelectedValuePath="Id"
                           DisplayMemberPath="Title"
-                          Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5"></ComboBox>
+                          Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="10"></ComboBox>
 
-                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -81,7 +81,7 @@
                         <DataGridTextColumn Header="Destination" Binding="{Binding Origin}"/>
                         <DataGridTextColumn Header="Bus" Binding="{Binding Destination}"/>
                         <DataGridTextColumn Header="Capacity" Binding="{Binding Bus}"/>
-                        <DataGridTextColumn Header="DateTime" Binding="{Binding DateTime}"/>
+                        <DataGridTextColumn Header="DateTime" Binding="{Binding TripDate}"/>
                         <DataGridTextColumn Header="Price" Binding="{Binding Price,StringFormat=c}"/>
                     </DataGrid.Columns>
                 </DataGrid>

@@ -32,6 +32,7 @@ public class TicketRepository : ITicketRepository
     {
         var ticket = context.Tickets.First(t => t.Id == id);
         context.Remove(ticket);
+        context.SaveChanges();
     }
 
     public void Update(Ticket ticket)
@@ -40,7 +41,7 @@ public class TicketRepository : ITicketRepository
 
         data.FirstName = ticket.FirstName;
         data.LastName = ticket.LastName;
-        data.Trip = ticket.Trip;
+        data.TripId = ticket.TripId;
         context.Entry(data).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         context.SaveChanges();
     }

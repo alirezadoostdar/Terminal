@@ -11,7 +11,7 @@ using Terminal.Infarstructure;
 namespace Terminal.Infarstructure.Migrations
 {
     [DbContext(typeof(TerminalDbContext))]
-    [Migration("20250409091036_InitialCreate")]
+    [Migration("20250410095659_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,6 +41,7 @@ namespace Terminal.Infarstructure.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -59,10 +60,12 @@ namespace Terminal.Infarstructure.Migrations
 
                     b.Property<string>("Destination")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Origin")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -78,10 +81,12 @@ namespace Terminal.Infarstructure.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TripId")
@@ -105,6 +110,7 @@ namespace Terminal.Infarstructure.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateTime")
@@ -113,11 +119,16 @@ namespace Terminal.Infarstructure.Migrations
                     b.Property<int>("RouteId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("RouteId1")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BusId");
 
                     b.HasIndex("RouteId");
+
+                    b.HasIndex("RouteId1");
 
                     b.ToTable("Trips");
                 });
@@ -127,7 +138,7 @@ namespace Terminal.Infarstructure.Migrations
                     b.HasOne("Terminal.Domain.Entities.Trip", "Trip")
                         .WithMany()
                         .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Trip");
@@ -138,14 +149,18 @@ namespace Terminal.Infarstructure.Migrations
                     b.HasOne("Terminal.Domain.Entities.Bus", "Bus")
                         .WithMany()
                         .HasForeignKey("BusId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Terminal.Domain.Entities.Route", "Route")
-                        .WithMany("Trips")
+                        .WithMany()
                         .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Terminal.Domain.Entities.Route", null)
+                        .WithMany("Trips")
+                        .HasForeignKey("RouteId1");
 
                     b.Navigation("Bus");
 

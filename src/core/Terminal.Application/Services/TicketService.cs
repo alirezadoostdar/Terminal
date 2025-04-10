@@ -31,19 +31,35 @@ public class TicketService
             Destination = x.Trip.Route.Destination, 
             TripDate = x.Trip.DateTime,
             Bus = x.Trip.Bus.Title,
-            Price = x.Trip.Route.BasePrice * x.Trip.Bus.Rate
+            Price = x.Trip.Route.BasePrice * x.Trip.Bus.Rate,
+            TripId = x.Trip.Id
         });
     }
 
     public void Add(TicketDto ticket) 
     {
-        var trip = tripRepository.Get(ticket.TripId);
         ticketRepository.Add(new Ticket
         {
             Id = ticket.Id,
             FirstName = ticket.FirstName,
             LastName = ticket.LastName,
-            Trip = trip,
+            TripId = ticket.TripId,
+        });
+    }
+
+    public void Remove(int id)
+    {
+        ticketRepository.Remove(id);
+    }
+
+    public void Update(TicketDto ticket)
+    {
+        ticketRepository.Update(new Ticket
+        {
+            Id = ticket.Id,
+            FirstName = ticket.FirstName,
+            LastName = ticket.LastName,
+            TripId = ticket.TripId
         });
     }
 }

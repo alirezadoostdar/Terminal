@@ -103,4 +103,9 @@ public class TripService
             $"| Price: {(x.Route.BasePrice * x.Bus.Rate).ToString("c")} | Date: {x.DateTime}",
         });
     }
+
+    public bool HasTicket(int id)
+    {
+        return tripRepository.HasTicket(id);
+    }
 }

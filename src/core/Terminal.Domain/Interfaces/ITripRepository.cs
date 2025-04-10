@@ -16,4 +16,5 @@ public interface ITripRepository
     Trip Get(int id);
     IEnumerable<Trip> GetValidList();
     IEnumerable<Trip> GetByRouteId(int id);
+    bool HasTicket(int id);
 }

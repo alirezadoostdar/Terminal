@@ -26,8 +26,7 @@ public class TripRepository : ITripRepository
 
     public IEnumerable<Trip> GetAll()
     {
-        var list = context.Trips;
-        return context.Trips;
+        return context.Trips.Include(x => x.Bus).Include(x => x.Route);
     }
 
     public IEnumerable<Trip> GetByRouteId(int id)
@@ -41,6 +40,11 @@ public class TripRepository : ITripRepository
         return list;
     }
 
+    public bool HasTicket(int id)
+    {
+        return context.Tickets.Any(x => x.TripId == id);
+    }
+
     public void Remove(int id)
     {
         var trip = context.Trips.First(x => x.Id == id);
@@ -52,7 +56,7 @@ public class TripRepository : ITripRepository
     {
         var data = context.Trips.First(x => x.Id == trip.Id);
 
-        data.DateTime = DateTime.Now;
+        data.DateTime = trip.DateTime;
         data.Code = trip.Code;
         data.Bus = trip.Bus;
         data.Route = trip.Route;

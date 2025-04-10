@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using Terminal.WPF.Commands;
 
 namespace Terminal.WPF.ViewModels;
 
-public class TicketViewModel : BaseViewModel
+public class TicketViewModel : BaseViewModel, IDataErrorInfo
 {
     private readonly TicketService ticketService;
     private readonly TripService tripService;
@@ -48,7 +49,17 @@ public class TicketViewModel : BaseViewModel
     public TicketListDto SelectedItem
     {
         get { return selectedItem; }
-        set { selectedItem = value;  NotifyPropertyChanged(); }
+        set
+        { 
+            selectedItem = value;
+            if (value != null)
+            {
+                Id = value.Id;
+                FirstName = value.FristName;
+                LastName = value.LastName;
+                SelectedTripItem = Trips.Where(x => x.Id == value.TripId).FirstOrDefault();
+            }
+            NotifyPropertyChanged(); }
     }
 
 
@@ -106,17 +117,31 @@ public class TicketViewModel : BaseViewModel
 
     #region Commands
     public RelayCommand AddCommand => new RelayCommand(execute => Add());
-    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete());
-    public RelayCommand UpdateCommand => new RelayCommand(execute => Update());
+    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete()
+    , canExecute => IsValidForDelete());
+    public RelayCommand UpdateCommand => new RelayCommand(execute => Update()
+        , canExecute => IsValidForDelete());
 
+    private bool IsValidForDelete()
+    {
+        bool result = false;
+
+        result = Id > 0;
+        if(selectedItem != null)
+            result = SelectedItem.TripDate > DateTime.Now;
+
+        return result;
+    }
     private void Update()
     {
         try
         {
-            tripService.Update(new TripDto
+            ticketService.Update(new TicketDto
             {
                 Id = Id,
-                Code = "",
+                FirstName = FirstName,
+                LastName = LastName,
+                TripId = TripId
             });
             MessageBox.Show("Updated Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             LoadList();
@@ -132,7 +157,7 @@ public class TicketViewModel : BaseViewModel
     {
         try
         {
-            tripService.Delete(Id);
+            ticketService.Remove(Id);
             MessageBox.Show("Deleted Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             LoadList();
         }
@@ -163,5 +188,23 @@ public class TicketViewModel : BaseViewModel
         }
 
     }
+    #endregion
+
+    #region Validation
+    public string Error => null;
+
+    public string this[string columnName]
+    {
+        get
+        {
+            return columnName switch
+            {
+                nameof(LastName) when string.IsNullOrEmpty(LastName) => "Please insert last name",
+                nameof(FirstName) when string.IsNullOrEmpty(FirstName) => "Please inset first name",
+                nameof(SelectedTripItem) when SelectedTripItem is null => "Please select a trip",
+                _ => null
+            };
+        }
+    } 
     #endregion
 }

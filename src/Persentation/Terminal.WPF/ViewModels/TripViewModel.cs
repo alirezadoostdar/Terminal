@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -146,8 +147,18 @@ public class TripViewModel : BaseViewModel
 
     #region Commands
     public RelayCommand AddCommand => new RelayCommand(execute => Add());
-    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete());
-    public RelayCommand UpdateCommand => new RelayCommand(execute => Update());
+    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete(),canExecute => CanDelete());
+
+    private bool CanDelete()
+    {
+        bool result = true;
+        result = Id > 0;
+        if (Id > 0)
+            result = !tripService.HasTicket(selectedItem.Id);
+        return result;
+    }
+
+    public RelayCommand UpdateCommand => new RelayCommand(execute => Update(), canExecute => CanDelete());
 
     private void Update()
     {
