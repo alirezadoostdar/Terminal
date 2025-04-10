@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.EntityFrameworkCore;
 using Terminal.Domain.Entities;
 using Terminal.Domain.Interfaces;
 
@@ -26,7 +26,7 @@ public class RouteRepository : IRouteRepository
 
     public IEnumerable<Route> GetAll()
     {
-        return context.Routes.ToList();
+        return context.Routes.AsNoTracking().ToList();
     }
 
     public bool IsUsed(int id)

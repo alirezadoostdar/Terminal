@@ -14,9 +14,6 @@ public class BaseViewModel : INotifyPropertyChanged
 
     protected void NotifyPropertyChanged([CallerMemberName] string name = null)
     {
-        if (PropertyChanged != null)
-        {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

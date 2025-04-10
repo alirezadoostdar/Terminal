@@ -146,7 +146,7 @@ public class TripViewModel : BaseViewModel
 
     #region Commands
     public RelayCommand AddCommand => new RelayCommand(execute => Add());
-    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete(), canExecute => Id > 0);
+    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete());
     public RelayCommand UpdateCommand => new RelayCommand(execute => Update());
 
     private void Update()
@@ -175,7 +175,7 @@ public class TripViewModel : BaseViewModel
     {
         try
         {
-            busService.Delete(Id);
+            tripService.Delete(Id);
             MessageBox.Show("Deleted Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             LoadList();
         }

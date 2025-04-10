@@ -1,4 +1,5 @@
-﻿using Terminal.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Terminal.Domain.Entities;
 using Terminal.Domain.Interfaces;
 
 namespace Terminal.Infarstructure.Repositories;
@@ -34,7 +35,7 @@ public class BusRepository : IBusRepository
 
     public IEnumerable<Bus> GetAll()
     {
-        return context.Buses.ToList();
+        return context.Buses.AsNoTracking().ToList();
     }
 
     public bool IsUsed(int id)

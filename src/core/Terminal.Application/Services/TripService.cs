@@ -92,4 +92,15 @@ public class TripService
             RouteId = x.Route.Id,
         });
     }
+
+    public IEnumerable<TripComboDto> GetCombo()
+    {
+        var list = tripRepository.GetAll();
+        return tripRepository.GetAll().Select(x => new TripComboDto
+        {
+            Id = x.Id,
+            Title = $"{x.Route.Origin} To {x.Route.Destination} | Bus: {x.Bus.Title} " +
+            $"| Price: {(x.Route.BasePrice * x.Bus.Rate).ToString("c")} | Date: {x.DateTime}",
+        });
+    }
 }

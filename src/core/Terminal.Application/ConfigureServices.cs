@@ -15,6 +15,7 @@ public static class ConfigureServices
         services.AddScoped<BusService>();
         services.AddScoped<RouteService>();
         services.AddScoped<TripService>();
+        services.AddScoped<TicketService>();
         return services;
     }
 }

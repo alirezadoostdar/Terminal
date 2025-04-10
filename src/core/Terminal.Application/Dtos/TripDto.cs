@@ -28,3 +28,10 @@ public class TripListDto
     public int BusId { get; set; }
     public int RouteId { get; set; }
 }
+
+
+public class TripComboDto
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+}

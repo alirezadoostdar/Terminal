@@ -108,7 +108,7 @@ public class BusViewModel : BaseViewModel
 
     #region Commands
     public RelayCommand AddCommand => new RelayCommand(execute => Add());
-    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete(),canExecute => Id > 0);
+    public RelayCommand DeleteCommand => new RelayCommand(execute => Delete(),canExecute => SelectedItem != null);
     public RelayCommand UpdateCommand => new RelayCommand(execute => Update());
 
     private void Update()

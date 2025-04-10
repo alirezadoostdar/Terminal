@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using Terminal.Domain.Entities;
 using Terminal.Domain.Interfaces;
 
@@ -30,17 +26,19 @@ public class TripRepository : ITripRepository
 
     public IEnumerable<Trip> GetAll()
     {
-        return context.Trips.ToList();
+        var list = context.Trips;
+        return context.Trips;
     }
 
     public IEnumerable<Trip> GetByRouteId(int id)
     {
-        return context.Trips.Where(x => x.Route.Id == id);
+        return context.Trips.Where(x => x.Route.Id == id).ToList();
     }
 
     public IEnumerable<Trip> GetValidList()
     {
-        return context.Trips.Where(x => x.DateTime > DateTime.Now).ToList();
+        var list = context.Trips.Where(x => x.DateTime > DateTime.Now).ToList();
+        return list;
     }
 
     public void Remove(int id)

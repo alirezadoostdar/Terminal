@@ -11,7 +11,7 @@ using Terminal.Infarstructure;
 namespace Terminal.Infarstructure.Migrations
 {
     [DbContext(typeof(TerminalDbContext))]
-    [Migration("20250407145301_InitialCreate")]
+    [Migration("20250409091036_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
