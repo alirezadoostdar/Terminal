@@ -20,7 +20,10 @@ public class TerminalDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        //modelBuilder.ApplyConfiguration(new BusConfig());
+        modelBuilder.ApplyConfiguration(new BusConfig());
+        modelBuilder.ApplyConfiguration(new RouteConfig());
+        modelBuilder.ApplyConfiguration(new TripConfig());
+        modelBuilder.ApplyConfiguration(new TicketCongig());
     }
 
     public DbSet<Bus> Buses { get; set; }

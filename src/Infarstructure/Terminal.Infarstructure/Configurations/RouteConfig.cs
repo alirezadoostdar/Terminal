@@ -9,22 +9,21 @@ using Terminal.Domain.Entities;
 
 namespace Terminal.Infarstructure.Configurations;
 
-public class BusConfig : IEntityTypeConfiguration<Bus>
+public class RouteConfig : IEntityTypeConfiguration<Route>
 {
-    public void Configure(EntityTypeBuilder<Bus> builder)
+    public void Configure(EntityTypeBuilder<Route> builder)
     {
         builder.HasKey(x => x.Id);
 
-        builder.Property(m => m.Title).IsRequired().HasMaxLength(200);
-
-        builder.Property(m => m.Capacity)
+        builder.Property(x => x.Origin)
+            .HasMaxLength(50)
             .IsRequired();
 
-        builder.Property(m => m.Model)
+        builder.Property(x => x.Destination)
+            .HasMaxLength(50)
             .IsRequired();
 
-        builder.Property(m => m.Rate)
+        builder.Property(x => x.BasePrice)
             .IsRequired();
-
     }
 }
